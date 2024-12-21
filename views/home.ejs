@@ -3,20 +3,33 @@
 <head>
     <%- include('./partials/head') %>
     <title>Home</title>
+    <style>
+        .card {
+            width: 20rem; /* Reduced width */
+        }
+        .card-img-top {
+            height: 10rem; /* Adjust the image height */
+            object-fit: cover; /* Ensures the image fits without distortion */
+        }
+    </style>
 </head>
 <body>
     <%- include('./partials/nav') %> 
 
     <div class="container mt-3">
-        <% blogs.forEach(blog => { %> <!-- Correctly opening the loop -->
-            <div class="card" style="width: 18rem; margin-bottom: 20px;">
-                <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="Blog cover page">
-                <div class="card-body">
-                    <h5 class="card-title"><%= blog.title %></h5>
-                    <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+        <div class="row justify-content-center">
+            <% blogs.forEach(blog => { %>
+                <div class="col-md-3 mb-4 d-flex justify-content-center"> <!-- Centers cards in the row -->
+                    <div class="card"> <!-- Smaller card dimensions -->
+                        <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="Blog cover page">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= blog.title %></h5>
+                            <a href="/blog/<%= blog._id %>" class="btn btn-primary btn-sm">View</a> <!-- Smaller button -->
+                        </div>
+                    </div>
                 </div>
-            </div>
-        <% }) %> <!-- Properly closing the loop -->
+            <% }) %>
+        </div>
     </div>
 
     <%- include('./partials/scripts') %> 

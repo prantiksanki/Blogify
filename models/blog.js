@@ -1,4 +1,5 @@
 const {Schema , model} = require("mongoose") ; 
+const {User} = require("./user")  ;
 
 const blogSchema = new Schema ({
     title :
@@ -19,7 +20,7 @@ const blogSchema = new Schema ({
     createdBy :
     {
         type : Schema.Types.ObjectId ,
-        ref : "user"  ,
+        ref : "User"  ,
     },
 },
 {timestamps : true}

@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express") ; 
 const path = require("path") ; 
 const app = express() ; 
@@ -8,7 +10,7 @@ const checkForAuthenticationCookie = require("./middleware/authentication");
 const blogRoute = require("./routes/blog") ;
 const Blog = require("./models/blog")
 
-const PORT = 80 ; 
+const PORT = process.env.PORT || 8000 ; 
 
 app.set("view engine" , "ejs") ;
 app.set("views" , path.resolve("./views")) ; 
@@ -19,7 +21,7 @@ app.use(checkForAuthenticationCookie("token")) ;
 
 app.use(express.static(path.resolve("./public"))) ;     // content of public folder can serve statically
 
-mongoose.connect("mongodb://localhost:27017/blogify")
+mongoose.connect(process.env.MONGO_URL)
 .then(e => console.log("MongoDB is connected")) ; 
 
 app.get("/" ,async  (req,res) =>
